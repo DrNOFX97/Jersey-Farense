@@ -1,0 +1,7 @@
+{
+  "name": "Farense Jersey AI Editor",
+  "description": "Upload an image and use text prompts or AI-powered jersey changes to edit outfits with Farense soccer club jerseys using Gemini 2.5 Flash Image.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
