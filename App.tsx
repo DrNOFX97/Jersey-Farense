@@ -160,10 +160,12 @@ const App: React.FC = () => {
 
       // Convert jersey URL to base64
       let jerseyBase64: string;
-      if (selectedJersey.base64.startsWith('http') || selectedJersey.base64.startsWith('/')) {
-        jerseyBase64 = await urlToBase64(selectedJersey.base64);
-      } else {
+      if (selectedJersey.path) {
+        jerseyBase64 = await urlToBase64(selectedJersey.path);
+      } else if (selectedJersey.base64) {
         jerseyBase64 = selectedJersey.base64;
+      } else {
+        throw new Error('No image path or base64 data found for selected jersey.');
       }
 
       const { data: jerseyData, mimeType: jerseyMimeType } = getBase64DataAndMimeType(jerseyBase64);
@@ -227,7 +229,7 @@ const App: React.FC = () => {
       const response = await withTimeout(request, API_CONFIG.REQUEST_TIMEOUT_MS);
 
       const generatedImagePart = response.candidates?.[0]?.content?.parts?.[0];
-      if (generatedImagePart?.inlineData) {
+      if (generatedImagePart?.inlineData && generatedImagePart.inlineData.data) {
         const base64ImageBytes: string = generatedImagePart.inlineData.data;
         const imageUrl = `data:${generatedImagePart.inlineData.mimeType};base64,${base64ImageBytes}`;
         setEditedImage(imageUrl);
@@ -344,7 +346,7 @@ const App: React.FC = () => {
           {selectedJersey && (
             <article className="flex items-center space-x-4 p-4 border border-gray-200 rounded-md bg-blue-50">
               <img
-                src={selectedJersey.base64}
+                src={selectedJersey.path ? selectedJersey.path : selectedJersey.base64 || ''}
                 alt={`Camisola selecionada: ${selectedJersey.name}`}
                 className="h-20 w-20 object-contain"
               />

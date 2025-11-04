@@ -27,4 +27,4 @@ export const API_CONFIG = {
   REQUEST_TIMEOUT_MS: 60000, // 60 seconds timeout for image generation
   MAX_IMAGE_SIZE_MB: 20, // Maximum upload file size
   SUPPORTED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-} as const;
+};

@@ -112,3 +112,33 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "description": "Estádio São Luís"
   }
 ];
+
+export const urlToBase64 = async (url: string): Promise<string> => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+};
+
+export const loadJerseys = async (): Promise<JerseyData[]> => {
+  const jerseysWithBase64 = await Promise.all(
+    FARENSE_JERSEYS.map(async (jersey) => {
+      if (jersey.path) {
+        try {
+          const base64 = await urlToBase64(jersey.path);
+          return { ...jersey, base64 };
+        } catch (error) {
+          console.error(`Failed to load image for ${jersey.name}:`, error);
+          // Return jersey without base64 if loading fails
+          return jersey;
+        }
+      }
+      return jersey;
+    })
+  );
+  return jerseysWithBase64;
+};
