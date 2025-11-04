@@ -7,9 +7,9 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "description": "Camisola histórica do Farense de 1981"
   },
   {
-    "name": "Farense 1982",
-    "path": "camisolas/1982.png",
-    "description": "Camisola histórica do Farense de 1982"
+    "name": "Farense 1983",
+    "path": "camisolas/1983.png",
+    "description": "Camisola histórica do Farense de 1983"
   },
   {
     "name": "Farense 1988",
@@ -27,9 +27,9 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "description": "Camisola histórica do Farense de 1990"
   },
   {
-    "name": "Farense 1995",
-    "path": "camisolas/1995.jpg",
-    "description": "Camisola histórica do Farense de 1995"
+    "name": "Farense 1994",
+    "path": "camisolas/1994.jpg",
+    "description": "Camisola histórica do Farense de 1994"
   },
   {
     "name": "Farense 1997",
