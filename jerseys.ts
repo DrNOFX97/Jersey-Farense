@@ -106,7 +106,6 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "path": "/camisolas/2025_3.jpg",
     "description": "Camisola do Farense de 2025"
   }
-  }
 ];
 
 export const urlToBase64 = async (url: string): Promise<string> => {
