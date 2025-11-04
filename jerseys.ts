@@ -140,5 +140,6 @@ export const loadJerseys = async (): Promise<JerseyData[]> => {
       return jersey;
     })
   );
+  console.log("Loaded jerseys:", jerseysWithBase64.map(j => j.name));
   return jerseysWithBase64;
 };
