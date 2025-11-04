@@ -210,7 +210,36 @@ const App: React.FC = () => {
         });
       }
 
-      const promptText = `Mude a roupa da pessoa na imagem para usar esta camisola: ${selectedJersey.description}. A pessoa deve usar calções pretos com pequeno detalhe branco e meias pretas que vão até imediatamente abaixo do joelho, também com pequeno detalhe branco. Coloque a pessoa de corpo inteiro em pé no estádio do Farense (use a imagem do estádio como o chão/fundo). A pessoa deve estar completamente visível do pé à cabeça.`;
+const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium). 
+
+OUTFIT SPECIFICATIONS:
+- Jersey: ${selectedJersey.description}
+- Shorts: Black athletic shorts with subtle white accent details
+- Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
+- Footwear: Black football boots appropriate for the kit
+
+COMPOSITION & POSE:
+- Full body visible from head to toe in professional football player pose
+- Person centered in frame with proper proportions
+- Confident, athletic posture typical of professional football player (not standing still, but in action)
+- Include a football/soccer ball from the same era as the jersey (${selectedJersey.name.includes("19") || selectedJersey.name.includes("20") ? selectedJersey.name.substring(8, 12) : "modern"} era ball)
+- Natural body language and facial expression of a professional football player
+
+ENVIRONMENT:
+- Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
+- Ground: Authentic stadium grass texture with field markings visible
+- Background: Stadium architecture from the provided stadium image, including seating and atmospheric details of SC Farense home ground
+- Lighting: Natural stadium lighting with realistic shadows and highlights on figure and kit
+
+QUALITY PARAMETERS:
+- Hyperrealistic rendering with attention to fabric textures, material properties, and authentic kit details
+- Photographic depth of field with subject in sharp focus
+- Accurate color grading matching professional sports photography
+- Seamless integration between subject and stadium environment
+- Preserve original facial features and identity of the person
+- Professional sports photography aesthetic with cinematic quality
+
+Style: Photojournalistic sports photography, 8K resolution quality, natural color palette.`;
 
       parts.push({
         text: promptText,
