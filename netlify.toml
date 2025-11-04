@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && npm run build"
+  command = "npm install && npx vite build"
   publish = "dist"
 
 [build.environment]
@@ -11,7 +11,7 @@
   status = 200
 
 [context.production]
-  command = "npm install && npm run build"
+  command = "npm install && npx vite build"
   
 [context.production.environment]
   NODE_VERSION = "20"
