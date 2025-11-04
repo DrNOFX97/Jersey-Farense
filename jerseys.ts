@@ -82,34 +82,30 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "description": "Camisola histórica do Farense de 2021"
   },
   {
-    "name": "Farense 2024/1",
+    "name": "Farense 2024 - Principal",
     "path": "/camisolas/2024_1.jpg",
     "description": "Camisola do Farense de 2024"
   },
   {
-    "name": "Farense 2024/2",
+    "name": "Farense 2024 - Alternativa",
     "path": "/camisolas/2024_2.jpg",
     "description": "Camisola do Farense de 2024"
   },
   {
-    "name": "Farense 2025/1",
+    "name": "Farense 2025 - Principal",
     "path": "/camisolas/2025_1.jpg",
     "description": "Camisola do Farense de 2025"
   },
   {
-    "name": "Farense 2025/2",
+    "name": "Farense 2025 - Alternativa",
     "path": "/camisolas/2025_2.jpg",
     "description": "Camisola do Farense de 2025"
   },
   {
-    "name": "Farense 2025/3",
+    "name": "Farense 2025 - Alternativa 2",
     "path": "/camisolas/2025_3.jpg",
     "description": "Camisola do Farense de 2025"
-  },
-  {
-    "name": "Estádio São Luís",
-    "path": "/camisolas/estadio.png",
-    "description": "Estádio São Luís"
+  }
   }
 ];
 
