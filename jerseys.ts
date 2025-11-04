@@ -3,112 +3,112 @@ import { JerseyData } from './types';
 export const FARENSE_JERSEYS: JerseyData[] = [
   {
     "name": "Farense 1981",
-    "path": "camisolas/1981.png",
+    "path": "/camisolas/1981.png",
     "description": "Camisola histórica do Farense de 1981"
   },
   {
     "name": "Farense 1983",
-    "path": "camisolas/1983.png",
+    "path": "/camisolas/1983.png",
     "description": "Camisola histórica do Farense de 1983"
   },
   {
     "name": "Farense 1988",
-    "path": "camisolas/1988.png",
+    "path": "/camisolas/1988.png",
     "description": "Camisola histórica do Farense de 1988"
   },
   {
     "name": "Farense 1989",
-    "path": "camisolas/1989.png",
+    "path": "/camisolas/1989.png",
     "description": "Camisola histórica do Farense de 1989"
   },
   {
     "name": "Farense 1990",
-    "path": "camisolas/1990.jpg",
+    "path": "/camisolas/1990.jpg",
     "description": "Camisola histórica do Farense de 1990"
   },
   {
     "name": "Farense 1994",
-    "path": "camisolas/1994.jpg",
+    "path": "/camisolas/1994.jpg",
     "description": "Camisola histórica do Farense de 1994"
   },
   {
     "name": "Farense 1997",
-    "path": "camisolas/1997.jpg",
+    "path": "/camisolas/1997.jpg",
     "description": "Camisola histórica do Farense de 1997"
   },
   {
     "name": "Farense 1998",
-    "path": "camisolas/1998.png",
+    "path": "/camisolas/1998.png",
     "description": "Camisola histórica do Farense de 1998"
   },
   {
     "name": "Farense 1999",
-    "path": "camisolas/1999.png",
+    "path": "/camisolas/1999.png",
     "description": "Camisola histórica do Farense de 1999"
   },
   {
     "name": "Farense 2000",
-    "path": "camisolas/2000.png",
+    "path": "/camisolas/2000.png",
     "description": "Camisola histórica do Farense de 2000"
   },
   {
     "name": "Farense 2002",
-    "path": "camisolas/2002.png",
+    "path": "/camisolas/2002.png",
     "description": "Camisola histórica do Farense de 2002"
   },
   {
     "name": "Farense 2003",
-    "path": "camisolas/2003.png",
+    "path": "/camisolas/2003.png",
     "description": "Camisola histórica do Farense de 2003"
   },
   {
     "name": "Farense 2013",
-    "path": "camisolas/2013.jpg",
+    "path": "/camisolas/2013.jpg",
     "description": "Camisola histórica do Farense de 2013"
   },
   {
     "name": "Farense 2014",
-    "path": "camisolas/2014.png",
+    "path": "/camisolas/2014.png",
     "description": "Camisola histórica do Farense de 2014"
   },
   {
     "name": "Farense 2015",
-    "path": "camisolas/2015.jpg",
+    "path": "/camisolas/2015.jpg",
     "description": "Camisola histórica do Farense de 2015"
   },
   {
     "name": "Farense 2021",
-    "path": "camisolas/2021.jpg",
+    "path": "/camisolas/2021.jpg",
     "description": "Camisola histórica do Farense de 2021"
   },
   {
     "name": "Farense 2024/1",
-    "path": "camisolas/2024_1.jpg",
+    "path": "/camisolas/2024_1.jpg",
     "description": "Camisola do Farense de 2024"
   },
   {
     "name": "Farense 2024/2",
-    "path": "camisolas/2024_2.jpg",
+    "path": "/camisolas/2024_2.jpg",
     "description": "Camisola do Farense de 2024"
   },
   {
     "name": "Farense 2025/1",
-    "path": "camisolas/2025_1.jpg",
+    "path": "/camisolas/2025_1.jpg",
     "description": "Camisola do Farense de 2025"
   },
   {
     "name": "Farense 2025/2",
-    "path": "camisolas/2025_2.jpg",
+    "path": "/camisolas/2025_2.jpg",
     "description": "Camisola do Farense de 2025"
   },
   {
     "name": "Farense 2025/3",
-    "path": "camisolas/2025_3.jpg",
+    "path": "/camisolas/2025_3.jpg",
     "description": "Camisola do Farense de 2025"
   },
   {
     "name": "Estádio São Luís",
-    "path": "camisolas/estadio.png",
+    "path": "/camisolas/estadio.png",
     "description": "Estádio São Luís"
   }
 ];
