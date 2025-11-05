@@ -3,7 +3,7 @@ import { JerseyData } from './types';
 export const FARENSE_JERSEYS: JerseyData[] = [
   {
     "name": "Farense 1981",
-    "path": "/camisolas/1981.png",
+    "path": "/camisolas/1981.jpg",
     "description": "Camisola histórica do Farense de 1981",
     "ball": "/bolas/1982.webp"
   },
@@ -45,7 +45,7 @@ export const FARENSE_JERSEYS: JerseyData[] = [
   },
   {
     "name": "Farense 1998",
-    "path": "/camisolas/1998.png",
+    "path": "/camisolas/1998.jpg",
     "description": "Camisola histórica do Farense de 1998",
     "ball": "/bolas/1994.webp"
   },

@@ -197,17 +197,13 @@ const App: React.FC = () => {
       }
 
       const promptText = `
-      **Primary Goal: Create a photorealistic, full-body portrait of the person from the original image, wearing the Farense kit in the Estádio de São Luís.**
-
-      **Non-Negotiable Rule: The person's face must be an exact, 100% perfect match to the original photo.** Do not alter, modify, or change their facial features in any way. The final image must be instantly recognizable as the same person.
-
-      **Key Elements:**
-      - **Outfit:** Wear the specified Farense jersey (${selectedJersey.description}), black shorts, black socks, and football boots.
-      - **Pose:** Assume a natural, athletic pose of a professional football player on the pitch.
-      - **Environment:** Place the person on the pitch at Estádio de São Luís, using the provided stadium image for the background. Include the correct football for the era.
-      - **Quality:** The final image should be photorealistic, with a professional sports photography style.
-
-      **Final Verification:** Before finishing, check if the face is identical to the original. If not, regenerate until it is perfect.
+      **Rule #1: The face must be identical to the original photo.** This is the most important rule. Do not change the face.
+      
+      Create a photorealistic image of the person wearing the Farense kit (${selectedJersey.description}) at Estádio de São Luís.
+      
+      - The person should be in a full-body athletic pose on the pitch.
+      - Include the correct football for the era.
+      - The final image should look like a professional sports photograph.
       `;
 
       parts.push({ text: promptText });
