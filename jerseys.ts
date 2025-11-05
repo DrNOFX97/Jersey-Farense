@@ -27,19 +27,19 @@ export const FARENSE_JERSEYS: JerseyData[] = [
   },
   {
     "name": "Farense 1990",
-    "path": "/camisolas/1990.jpg",
+    "path": "/camisolas/1990.png",
     "description": "Camisola histórica do Farense de 1990",
     "ball": "/bolas/1990.webp"
   },
   {
     "name": "Farense 1994",
-    "path": "/camisolas/1994.jpg",
+    "path": "/camisolas/1994.png",
     "description": "Camisola histórica do Farense de 1994",
     "ball": "/bolas/1994.webp"
   },
   {
     "name": "Farense 1997",
-    "path": "/camisolas/1997.jpg",
+    "path": "/camisolas/1997.png",
     "description": "Camisola histórica do Farense de 1997",
     "ball": "/bolas/1994.webp"
   },
