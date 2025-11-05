@@ -10,4 +10,6 @@ export interface JerseyData {
   path?: string;
   /** Jersey description */
   description: string;
+  /** Path to the official ball for the season */
+  ball?: string;
 }

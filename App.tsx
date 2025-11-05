@@ -180,53 +180,74 @@ const App: React.FC = () => {
       }
 
       const { data: stadiumData, mimeType: stadiumMimeType } = getBase64DataAndMimeType(stadiumBase64);
-
-      if (!imageData || !imageMimeType || !jerseyData || !jerseyMimeType) {
-        throw new Error("Falha ao extrair dados da imagem ou camisola/tipo MIME.");
-      }
-
-      const parts: any[] = [
-        {
-          inlineData: {
-            data: imageData,
-            mimeType: imageMimeType,
-          },
-        },
-        {
-          inlineData: {
-            data: jerseyData,
-            mimeType: jerseyMimeType,
-          },
-        },
-      ];
-
-      // Add stadium background if available
-      if (stadiumData && stadiumMimeType) {
-        parts.push({
-          inlineData: {
-            data: stadiumData,
-            mimeType: stadiumMimeType,
-          },
-        });
-      }
-
-const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium). 
-
-OUTFIT SPECIFICATIONS:
-- Jersey: ${selectedJersey.description}
-- Shorts: Black athletic shorts with subtle white accent details
-- Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
-- Footwear: Black football boots appropriate for the kit
-
-COMPOSITION & POSE:
-- Full body visible from head to toe in professional football player pose
-- Person centered in frame with proper proportions
-- Confident, athletic posture typical of professional football player (not standing still, but in action)
-- Include a football/soccer ball from the same era as the jersey (${selectedJersey.name.includes("19") || selectedJersey.name.includes("20") ? selectedJersey.name.substring(8, 12) : "modern"} era ball)
-- Natural body language and facial expression of a professional football player
-
-ENVIRONMENT:
-- Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
+ 
+       // Load ball image
+       let ballBase64: string = '';
+       if (selectedJersey.ball) {
+         try {
+           ballBase64 = await urlToBase64(selectedJersey.ball);
+         } catch (err) {
+           console.warn('Ball image not found, continuing without it');
+         }
+       }
+       const { data: ballData, mimeType: ballMimeType } = getBase64DataAndMimeType(ballBase64);
+ 
+       if (!imageData || !imageMimeType || !jerseyData || !jerseyMimeType) {
+         throw new Error("Falha ao extrair dados da imagem ou camisola/tipo MIME.");
+       }
+ 
+       const parts: any[] = [
+         {
+           inlineData: {
+             data: imageData,
+             mimeType: imageMimeType,
+           },
+         },
+         {
+           inlineData: {
+             data: jerseyData,
+             mimeType: jerseyMimeType,
+           },
+         },
+       ];
+ 
+       // Add stadium background if available
+       if (stadiumData && stadiumMimeType) {
+         parts.push({
+           inlineData: {
+             data: stadiumData,
+             mimeType: stadiumMimeType,
+           },
+         });
+       }
+ 
+       // Add ball image if available
+       if (ballData && ballMimeType) {
+         parts.push({
+           inlineData: {
+             data: ballData,
+             mimeType: ballMimeType,
+           },
+         });
+       }
+ 
+ const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium).
+ 
+ OUTFIT SPECIFICATIONS:
+ - Jersey: ${selectedJersey.description}
+ - Shorts: Black athletic shorts with subtle white accent details
+ - Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
+ - Footwear: Black football boots appropriate for the kit
+ 
+ COMPOSITION & POSE:
+ - Full body visible from head to toe in professional football player pose
+ - Person centered in frame with proper proportions
+ - Confident, athletic posture typical of professional football player (not standing still, but in action)
+ - Include the provided football/soccer ball from the same era as the jersey
+ - Natural body language and facial expression of a professional football player
+ 
+ ENVIRONMENT:
+ - Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
 - Ground: Authentic stadium grass texture with field markings visible
 - Background: Stadium architecture from the provided stadium image, including seating and atmospheric details of SC Farense home ground
 - Lighting: Natural stadium lighting with realistic shadows and highlights on figure and kit
@@ -379,6 +400,13 @@ Style: Photojournalistic sports photography, 8K resolution quality, natural colo
                 alt={`Camisola selecionada: ${selectedJersey.name}`}
                 className="h-20 w-20 object-contain"
               />
+              {selectedJersey.ball && (
+                <img
+                  src={selectedJersey.ball}
+                  alt={`Bola oficial para ${selectedJersey.name}`}
+                  className="h-20 w-20 object-contain"
+                />
+              )}
               <div className="flex-1">
                 <p className="font-medium text-gray-800">{selectedJersey.name}</p>
                 <p className="text-sm text-gray-600">{selectedJersey.description}</p>
