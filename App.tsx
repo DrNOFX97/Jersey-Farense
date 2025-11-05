@@ -197,13 +197,16 @@ const App: React.FC = () => {
       }
 
       const promptText = `
-      **Rule #1: The face must be identical to the original photo.** This is the most important rule. Do not change the face.
-      
-      Create a photorealistic image of the person wearing the Farense kit (${selectedJersey.description}) at Estádio de São Luís.
-      
-      - The person should be in a full-body athletic pose on the pitch.
-      - Include the correct football for the era.
-      - The final image should look like a professional sports photograph.
+      **Primary Directive (Absolute Priority):**
+      1.  **Preserve Facial Identity:** The face of the person in the generated image must be an exact, 100% identical replica of the face in the original photo. This is the most important rule and overrides all other instructions. Do not alter, modify, or regenerate the face.
+
+      **Secondary Task:**
+      With the primary directive fulfilled, create a **photorealistic** image of the person in a full-body athletic pose on the pitch at Estádio de São Luís.
+
+      **Image Elements:**
+      - **Outfit:** The person must be wearing the provided Farense jersey (${selectedJersey.description}), along with black shorts, black socks, and football boots.
+      - **Environment:** Use the provided stadium image for the background and include the correct football for the era.
+      - **Style:** The final image should have the aesthetic of a professional sports photograph.
       `;
 
       parts.push({ text: promptText });
