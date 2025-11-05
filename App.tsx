@@ -197,36 +197,17 @@ const App: React.FC = () => {
       }
 
       const promptText = `
-      **OVERRIDING DIRECTIVE: FACIAL IDENTITY PRESERVATION**
-      Your primary and most critical objective is to preserve the exact facial identity of the person in the original image. This is a non-negotiable instruction.
-      - **DO NOT ALTER THE FACE:** You must not change, modify, morph, or blend the person's facial features in any way. The face in the generated image must be 100% identical to the face in the original photo.
-      - **EXACT REPLICATION:** This includes, but is not limited to, the precise shape and color of the eyes, nose, mouth, jawline, skin tone, hair, and any unique facial marks.
-      - **VERIFICATION:** Before outputting the final image, perform a self-correction check. If the face is not an exact match to the original, you must regenerate the image until it is. The final output must be immediately recognizable as the same person.
+      **Primary Goal: Create a photorealistic, full-body portrait of the person from the original image, wearing the Farense kit in the Estádio de São Luís.**
 
-      **TASK: FULL-BODY PORTRAIT GENERATION**
-      With the above directive as your absolute priority, create a photorealistic, full-body portrait of the person from the provided image, placing them in the Estádio de São Luís (SC Farense stadium).
+      **Non-Negotiable Rule: The person's face must be an exact, 100% perfect match to the original photo.** Do not alter, modify, or change their facial features in any way. The final image must be instantly recognizable as the same person.
 
-      **OUTFIT SPECIFICATIONS:**
-      - Jersey: ${selectedJersey.description}
-      - Shorts: Black athletic shorts with subtle white accent details.
-      - Socks: Professional black football/soccer socks extending to just below the knee, with minimal white trim.
-      - Footwear: Black football boots appropriate for the kit.
+      **Key Elements:**
+      - **Outfit:** Wear the specified Farense jersey (${selectedJersey.description}), black shorts, black socks, and football boots.
+      - **Pose:** Assume a natural, athletic pose of a professional football player on the pitch.
+      - **Environment:** Place the person on the pitch at Estádio de São Luís, using the provided stadium image for the background. Include the correct football for the era.
+      - **Quality:** The final image should be hyperrealistic, with a professional sports photography style.
 
-      **COMPOSITION & POSE:**
-      - Full body visible from head to toe in a professional football player pose (in action, not static).
-      - The person should be centered in the frame with realistic proportions.
-      - Include the provided football/soccer ball from the same era as the jersey.
-
-      **ENVIRONMENT:**
-      - Location: Estádio de São Luís pitch, using the provided stadium image for the background architecture and atmosphere.
-      - Lighting: Natural stadium lighting with realistic shadows.
-
-      **QUALITY PARAMETERS:**
-      - Hyperrealistic rendering with a focus on fabric textures and authentic kit details.
-      - Photographic depth of field, with the subject in sharp focus.
-      - Professional sports photography aesthetic.
-
-      **FINAL CHECK:** Does the face in the generated image look exactly like the face in the original photo? If not, you have failed the primary directive. Do not output the image unless the facial identity is perfectly preserved.
+      **Final Verification:** Before finishing, check if the face is identical to the original. If not, regenerate until it is perfect.
       `;
 
       parts.push({ text: promptText });
