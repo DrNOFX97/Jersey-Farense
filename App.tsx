@@ -205,7 +205,7 @@ const App: React.FC = () => {
       - **Outfit:** Wear the specified Farense jersey (${selectedJersey.description}), black shorts, black socks, and football boots.
       - **Pose:** Assume a natural, athletic pose of a professional football player on the pitch.
       - **Environment:** Place the person on the pitch at Estádio de São Luís, using the provided stadium image for the background. Include the correct football for the era.
-      - **Quality:** The final image should be hyperrealistic, with a professional sports photography style.
+      - **Quality:** The final image should be photorealistic, with a professional sports photography style.
 
       **Final Verification:** Before finishing, check if the face is identical to the original. If not, regenerate until it is perfect.
       `;
