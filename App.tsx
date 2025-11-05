@@ -196,18 +196,35 @@ const App: React.FC = () => {
         parts.push({ inlineData: { data: ballData, mimeType: ballMimeType } });
       }
 
-      const promptText = `
-      **Primary Directive (Absolute Priority):**
-      1.  **Preserve Facial Identity:** The face of the person in the generated image must be an exact, 100% identical replica of the face in the original photo. This is the most important rule and overrides all other instructions. Do not alter, modify, or regenerate the face.
+      const promptText = `Create a photorealistic, full-body portrait of the person from the provided image with a 100% identical face, standing naturally at Estádio de São Luís (SC Farense stadium). 
 
-      **Secondary Task:**
-      With the primary directive fulfilled, create a **photorealistic** image of the person in a full-body athletic pose on the pitch at Estádio de São Luís.
+OUTFIT SPECIFICATIONS:
+- Jersey: ${selectedJersey.description}
+- Shorts: Black athletic shorts with subtle white accent details
+- Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
+- Footwear: Black football boots appropriate for the kit
 
-      **Image Elements:**
-      - **Outfit:** The person must be wearing the provided Farense jersey (${selectedJersey.description}), along with black shorts, black socks, and football boots.
-      - **Environment:** Use the provided stadium image for the background and include the correct football for the era.
-      - **Style:** The final image should have the aesthetic of a professional sports photograph.
-      `;
+COMPOSITION & POSE:
+- Full body visible from head to toe in natural standing pose
+- Person centered in frame with proper proportions
+- Confident, athletic posture typical of professional football photography
+- Natural body language and facial expression
+
+ENVIRONMENT:
+- Location: Estádio de São Luís pitch
+- Ground: Authentic stadium grass texture with field markings visible
+- Background: Stadium architecture, seating, and atmospheric details of SC Farense home ground
+- Lighting: Natural stadium lighting with realistic shadows and highlights on figure and kit
+
+QUALITY PARAMETERS:
+- Hyperrealistic rendering with attention to fabric textures, material properties, and authentic kit details
+- Photographic depth of field with subject in sharp focus
+- Accurate color grading matching professional sports photography
+- Seamless integration between subject and stadium environment
+- Preserve original facial features and identity of the person
+- Professional sports photography aesthetic with cinematic quality
+
+Style: Photojournalistic sports photography, 8K resolution quality, natural color palette.`;
 
       parts.push({ text: promptText });
 
