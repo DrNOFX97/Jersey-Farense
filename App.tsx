@@ -196,52 +196,38 @@ const App: React.FC = () => {
         parts.push({ inlineData: { data: ballData, mimeType: ballMimeType } });
       }
 
-      const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium).
+      const promptText = `
+      **OVERRIDING DIRECTIVE: FACIAL IDENTITY PRESERVATION**
+      Your primary and most critical objective is to preserve the exact facial identity of the person in the original image. This is a non-negotiable instruction.
+      - **DO NOT ALTER THE FACE:** You must not change, modify, morph, or blend the person's facial features in any way. The face in the generated image must be 100% identical to the face in the original photo.
+      - **EXACT REPLICATION:** This includes, but is not limited to, the precise shape and color of the eyes, nose, mouth, jawline, skin tone, hair, and any unique facial marks.
+      - **VERIFICATION:** Before outputting the final image, perform a self-correction check. If the face is not an exact match to the original, you must regenerate the image until it is. The final output must be immediately recognizable as the same person.
 
-CRITICAL FACIAL PRESERVATION (HIGHEST PRIORITY):
-- MANDATORY: Preserve 100% exact facial features from the original image
-- Face structure: Maintain identical bone structure, jaw line, cheekbones, and facial proportions
-- Eyes: Exact eye color, shape, size, spacing, eyelid structure, and gaze direction
-- Nose: Identical nose shape, bridge width, nostril size, and tip definition
-- Mouth: Preserve exact lip shape, thickness, mouth width, and natural expression
-- Skin: Match exact skin tone, texture, complexion, and any distinctive marks
-- Hair: Identical hairstyle, hair color, texture, length, and styling exactly as shown
-- Ears: Same ear size, shape, and position if visible
-- Eyebrows: Exact eyebrow shape, thickness, arch, and color
-- Facial hair: Replicate any beard, mustache, or stubble exactly as in original
-- Expression: Maintain the person's natural facial expression and characteristic features
-- Identity: The face must be immediately recognizable as the exact same person - do not alter, morph, or blend features
+      **TASK: FULL-BODY PORTRAIT GENERATION**
+      With the above directive as your absolute priority, create a photorealistic, full-body portrait of the person from the provided image, placing them in the Estádio de São Luís (SC Farense stadium).
 
-OUTFIT SPECIFICATIONS:
-- Jersey: ${selectedJersey.description}
-- Shorts: Black athletic shorts with subtle white accent details
-- Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
-- Footwear: Black football boots appropriate for the kit
+      **OUTFIT SPECIFICATIONS:**
+      - Jersey: ${selectedJersey.description}
+      - Shorts: Black athletic shorts with subtle white accent details.
+      - Socks: Professional black football/soccer socks extending to just below the knee, with minimal white trim.
+      - Footwear: Black football boots appropriate for the kit.
 
-COMPOSITION & POSE:
-- Full body visible from head to toe in professional football player pose
-- Person centered in frame with proper proportions
-- Confident, athletic posture typical of professional football player (not standing still, but in action)
-- Include the provided football/soccer ball from the same era as the jersey
-- Natural body language and facial expression of a professional football player
+      **COMPOSITION & POSE:**
+      - Full body visible from head to toe in a professional football player pose (in action, not static).
+      - The person should be centered in the frame with realistic proportions.
+      - Include the provided football/soccer ball from the same era as the jersey.
 
-ENVIRONMENT:
-- Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
-- Ground: Authentic stadium grass texture with field markings visible
-- Background: Stadium architecture from the provided stadium image, including seating and atmospheric details of SC Farense home ground
-- Lighting: Natural stadium lighting with realistic shadows and highlights on figure and kit
+      **ENVIRONMENT:**
+      - Location: Estádio de São Luís pitch, using the provided stadium image for the background architecture and atmosphere.
+      - Lighting: Natural stadium lighting with realistic shadows.
 
-QUALITY PARAMETERS:
-- Hyperrealistic rendering with attention to fabric textures, material properties, and authentic kit details
-- Photographic depth of field with subject in sharp focus
-- Accurate color grading matching professional sports photography
-- Seamless integration between subject and stadium environment
-- Face must remain in perfect focus with maximum detail and sharpness
-- Professional sports photography aesthetic with cinematic quality
+      **QUALITY PARAMETERS:**
+      - Hyperrealistic rendering with a focus on fabric textures and authentic kit details.
+      - Photographic depth of field, with the subject in sharp focus.
+      - Professional sports photography aesthetic.
 
-Style: Photojournalistic sports photography, 8K resolution quality, natural color palette.
-
-VERIFICATION: The final image must pass the test - if shown side by side with the original, the person's face should be instantly recognizable as the same individual with zero deviation in facial features.`;
+      **FINAL CHECK:** Does the face in the generated image look exactly like the face in the original photo? If not, you have failed the primary directive. Do not output the image unless the facial identity is perfectly preserved.
+      `;
 
       parts.push({ text: promptText });
 
