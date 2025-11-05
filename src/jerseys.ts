@@ -129,16 +129,7 @@ export const FARENSE_JERSEYS: JerseyData[] = [
   }
 ];
 
-export const urlToBase64 = async (url: string): Promise<string> => {
-  const response = await fetch(url);
-  const blob = await response.blob();
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-};
+import { urlToBase64 } from '@/utils/imageUtils';
 
 export const loadJerseys = async (): Promise<JerseyData[]> => {
   const jerseysWithBase64 = await Promise.all(

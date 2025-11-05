@@ -1,7 +1,7 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import { JerseyData } from "@/types";
 import { getGeminiApiKey, API_CONFIG } from "@/config";
-import { urlToBase64 } from "@/jerseys";
+import { urlToBase64 } from "@/utils/imageUtils";
 
 const getBase64DataAndMimeType = (base64String: string | null): { data: string | null; mimeType: string | null } => {
   if (!base64String) return { data: null, mimeType: null };
