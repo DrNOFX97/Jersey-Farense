@@ -146,19 +146,11 @@ const App: React.FC = () => {
     setEditedImage(null);
 
     try {
-      let apiKey: string;
-      try {
-        apiKey = getGeminiApiKey();
-      } catch (keyError) {
-        setError((keyError as Error).message);
-        setLoading(false);
-        return;
-      }
-
+      const apiKey = getGeminiApiKey();
       const ai = new GoogleGenAI({ apiKey });
+
       const { data: imageData, mimeType: imageMimeType } = getBase64DataAndMimeType(originalImage);
 
-      // Convert jersey URL to base64
       let jerseyBase64: string;
       if (selectedJersey.path) {
         jerseyBase64 = await urlToBase64(selectedJersey.path);
@@ -167,87 +159,74 @@ const App: React.FC = () => {
       } else {
         throw new Error('No image path or base64 data found for selected jersey.');
       }
-
       const { data: jerseyData, mimeType: jerseyMimeType } = getBase64DataAndMimeType(jerseyBase64);
 
-      // Load stadium background
-      let stadiumBase64: string;
+      let stadiumBase64: string = '';
       try {
         stadiumBase64 = await urlToBase64('/camisolas/estadio.png');
       } catch (err) {
         console.warn('Stadium image not found, continuing without it');
-        stadiumBase64 = '';
+      }
+      const { data: stadiumData, mimeType: stadiumMimeType } = getBase64DataAndMimeType(stadiumBase64);
+
+      let ballBase64: string = '';
+      if (selectedJersey.ball) {
+        try {
+          ballBase64 = await urlToBase64(selectedJersey.ball);
+        } catch (err) {
+          console.warn('Ball image not found, continuing without it');
+        }
+      }
+      const { data: ballData, mimeType: ballMimeType } = getBase64DataAndMimeType(ballBase64);
+
+      if (!imageData || !imageMimeType || !jerseyData || !jerseyMimeType) {
+        throw new Error("Falha ao extrair dados da imagem ou camisola/tipo MIME.");
       }
 
-      const { data: stadiumData, mimeType: stadiumMimeType } = getBase64DataAndMimeType(stadiumBase64);
- 
-       // Load ball image
-       let ballBase64: string = '';
-       if (selectedJersey.ball) {
-         try {
-           ballBase64 = await urlToBase64(selectedJersey.ball);
-         } catch (err) {
-           console.warn('Ball image not found, continuing without it');
-         }
-       }
-       const { data: ballData, mimeType: ballMimeType } = getBase64DataAndMimeType(ballBase64);
- 
-       if (!imageData || !imageMimeType || !jerseyData || !jerseyMimeType) {
-         throw new Error("Falha ao extrair dados da imagem ou camisola/tipo MIME.");
-       }
- 
-       const parts: any[] = [
-         {
-           inlineData: {
-             data: imageData,
-             mimeType: imageMimeType,
-           },
-         },
-         {
-           inlineData: {
-             data: jerseyData,
-             mimeType: jerseyMimeType,
-           },
-         },
-       ];
- 
-       // Add stadium background if available
-       if (stadiumData && stadiumMimeType) {
-         parts.push({
-           inlineData: {
-             data: stadiumData,
-             mimeType: stadiumMimeType,
-           },
-         });
-       }
- 
-       // Add ball image if available
-       if (ballData && ballMimeType) {
-         parts.push({
-           inlineData: {
-             data: ballData,
-             mimeType: ballMimeType,
-           },
-         });
-       }
- 
- const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium).
- 
- OUTFIT SPECIFICATIONS:
- - Jersey: ${selectedJersey.description}
- - Shorts: Black athletic shorts with subtle white accent details
- - Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
- - Footwear: Black football boots appropriate for the kit
- 
- COMPOSITION & POSE:
- - Full body visible from head to toe in professional football player pose
- - Person centered in frame with proper proportions
- - Confident, athletic posture typical of professional football player (not standing still, but in action)
- - Include the provided football/soccer ball from the same era as the jersey
- - Natural body language and facial expression of a professional football player
- 
- ENVIRONMENT:
- - Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
+      const parts: any[] = [
+        { inlineData: { data: imageData, mimeType: imageMimeType } },
+        { inlineData: { data: jerseyData, mimeType: jerseyMimeType } },
+      ];
+
+      if (stadiumData && stadiumMimeType) {
+        parts.push({ inlineData: { data: stadiumData, mimeType: stadiumMimeType } });
+      }
+
+      if (ballData && ballMimeType) {
+        parts.push({ inlineData: { data: ballData, mimeType: ballMimeType } });
+      }
+
+      const promptText = `Create a photorealistic, full-body portrait of the person from the provided image, standing naturally at Estádio de São Luís (SC Farense stadium).
+
+CRITICAL FACIAL PRESERVATION (HIGHEST PRIORITY):
+- MANDATORY: Preserve 100% exact facial features from the original image
+- Face structure: Maintain identical bone structure, jaw line, cheekbones, and facial proportions
+- Eyes: Exact eye color, shape, size, spacing, eyelid structure, and gaze direction
+- Nose: Identical nose shape, bridge width, nostril size, and tip definition
+- Mouth: Preserve exact lip shape, thickness, mouth width, and natural expression
+- Skin: Match exact skin tone, texture, complexion, and any distinctive marks
+- Hair: Identical hairstyle, hair color, texture, length, and styling exactly as shown
+- Ears: Same ear size, shape, and position if visible
+- Eyebrows: Exact eyebrow shape, thickness, arch, and color
+- Facial hair: Replicate any beard, mustache, or stubble exactly as in original
+- Expression: Maintain the person's natural facial expression and characteristic features
+- Identity: The face must be immediately recognizable as the exact same person - do not alter, morph, or blend features
+
+OUTFIT SPECIFICATIONS:
+- Jersey: ${selectedJersey.description}
+- Shorts: Black athletic shorts with subtle white accent details
+- Socks: Professional black football/soccer socks extending to just below the knee, featuring minimal white trim details
+- Footwear: Black football boots appropriate for the kit
+
+COMPOSITION & POSE:
+- Full body visible from head to toe in professional football player pose
+- Person centered in frame with proper proportions
+- Confident, athletic posture typical of professional football player (not standing still, but in action)
+- Include the provided football/soccer ball from the same era as the jersey
+- Natural body language and facial expression of a professional football player
+
+ENVIRONMENT:
+- Location: Estádio de São Luís pitch (use the provided stadium image 'public/camisolas/estadio.png')
 - Ground: Authentic stadium grass texture with field markings visible
 - Background: Stadium architecture from the provided stadium image, including seating and atmospheric details of SC Farense home ground
 - Lighting: Natural stadium lighting with realistic shadows and highlights on figure and kit
@@ -257,29 +236,25 @@ QUALITY PARAMETERS:
 - Photographic depth of field with subject in sharp focus
 - Accurate color grading matching professional sports photography
 - Seamless integration between subject and stadium environment
-- Preserve original facial features and identity of the person
+- Face must remain in perfect focus with maximum detail and sharpness
 - Professional sports photography aesthetic with cinematic quality
 
-Style: Photojournalistic sports photography, 8K resolution quality, natural color palette.`;
+Style: Photojournalistic sports photography, 8K resolution quality, natural color palette.
 
-      parts.push({
-        text: promptText,
-      });
+VERIFICATION: The final image must pass the test - if shown side by side with the original, the person's face should be instantly recognizable as the same individual with zero deviation in facial features.`;
+
+      parts.push({ text: promptText });
 
       const request = ai.models.generateContent({
         model: 'gemini-2.5-flash-image',
-        contents: {
-          parts: parts,
-        },
-        config: {
-          responseModalities: [Modality.IMAGE],
-        },
+        contents: { parts },
+        config: { responseModalities: [Modality.IMAGE] },
       });
 
       const response = await withTimeout(request, API_CONFIG.REQUEST_TIMEOUT_MS);
 
       const generatedImagePart = response.candidates?.[0]?.content?.parts?.[0];
-      if (generatedImagePart?.inlineData && generatedImagePart.inlineData.data) {
+      if (generatedImagePart?.inlineData?.data) {
         const base64ImageBytes: string = generatedImagePart.inlineData.data;
         const imageUrl = `data:${generatedImagePart.inlineData.mimeType};base64,${base64ImageBytes}`;
         setEditedImage(imageUrl);
