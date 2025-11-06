@@ -3,7 +3,7 @@ import { JerseyData } from './types';
 export const FARENSE_JERSEYS: JerseyData[] = [
   {
     "name": "Farense 1981",
-    "path": "/camisolas/1981.jpg",
+    "path": "/camisolas/1981.png",
     "description": "Camisola histórica do Farense de 1981",
     "ball": "/bolas/1982.webp"
   },
@@ -17,7 +17,7 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "name": "Farense 1988",
     "path": "/camisolas/1988.png",
     "description": "Camisola histórica do Farense de 1988",
-    "ball": "/bolas/1986.webp"
+    "ball": "/bolas/1990.webp"
   },
   {
     "name": "Farense 1989",
@@ -27,27 +27,27 @@ export const FARENSE_JERSEYS: JerseyData[] = [
   },
   {
     "name": "Farense 1990",
-    "path": "/camisolas/1990.png",
+    "path": "/camisolas/1990.jpg",
     "description": "Camisola histórica do Farense de 1990",
     "ball": "/bolas/1990.webp"
   },
   {
     "name": "Farense 1994",
-    "path": "/camisolas/1994.png",
+    "path": "/camisolas/1994.jpg",
     "description": "Camisola histórica do Farense de 1994",
     "ball": "/bolas/1994.webp"
   },
   {
     "name": "Farense 1997",
-    "path": "/camisolas/1997.png",
+    "path": "/camisolas/1997.jpg",
     "description": "Camisola histórica do Farense de 1997",
     "ball": "/bolas/1994.webp"
   },
   {
     "name": "Farense 1998",
-    "path": "/camisolas/1998.jpg",
+    "path": "/camisolas/1998.png",
     "description": "Camisola histórica do Farense de 1998",
-    "ball": "/bolas/1994.webp"
+    "ball": "/bolas/2002.webp"
   },
   {
     "name": "Farense 1999",
@@ -98,37 +98,39 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2024 - Principal",
+    "name": "Farense 2024",
     "path": "/camisolas/2024_1.jpg",
-    "description": "Camisola do Farense de 2024",
+    "description": "Camisola histórica do Farense de 2024",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2024 - Alternativa",
+    "name": "Farense 2024",
     "path": "/camisolas/2024_2.jpg",
-    "description": "Camisola do Farense de 2024",
+    "description": "Camisola histórica do Farense de 2024",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025 - Principal",
+    "name": "Farense 2025",
     "path": "/camisolas/2025_1.jpg",
-    "description": "Camisola do Farense de 2025",
+    "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025 - Alternativa",
+    "name": "Farense 2025",
     "path": "/camisolas/2025_2.jpg",
-    "description": "Camisola do Farense de 2025",
+    "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025 - Alternativa 2",
+    "name": "Farense 2025",
     "path": "/camisolas/2025_3.jpg",
-    "description": "Camisola do Farense de 2025",
+    "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
   }
 ];
 
+// The rest of the file (loadJerseys function) remains the same for now.
+// We can refactor it later if needed.
 import { urlToBase64 } from '@/utils/imageUtils';
 
 export const loadJerseys = async (): Promise<JerseyData[]> => {
@@ -140,7 +142,6 @@ export const loadJerseys = async (): Promise<JerseyData[]> => {
           return { ...jersey, base64 };
         } catch (error) {
           console.error(`Failed to load image for ${jersey.name}:`, error);
-          // Return jersey without base64 if loading fails
           return jersey;
         }
       }

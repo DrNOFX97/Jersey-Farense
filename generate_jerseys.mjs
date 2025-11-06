@@ -1,55 +1,93 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const jerseysDir = path.join('public', 'camisolas');
+const ballsDir = path.join('public', 'bolas');
+const outputFile = path.join('src', 'jerseys.ts');
 
-// Read all JPG files from camisolas folder
-const camisolasDir = path.join(__dirname, 'camisolas');
-const files = fs.readdirSync(camisolasDir).filter(f => f.endsWith('.jpg')).sort();
+const getYearFromFilename = (filename) => {
+  const match = filename.match(/^(\d{4})/);
+  return match ? parseInt(match[1], 10) : null;
+};
 
-console.log(`Found ${files.length} jersey images`);
+const findClosestBall = (jerseyYear, ballYears) => {
+  if (!jerseyYear || ballYears.length === 0) return null;
 
-const jerseys = files.map((file) => {
-  const filePath = path.join(camisolasDir, file);
-  const imageBuffer = fs.readFileSync(filePath);
-  const base64 = imageBuffer.toString('base64');
+  let closestYear = null;
+  let minDiff = Infinity;
 
-  // Extract year and variant from filename
-  const yearMatch = file.match(/(\d{4})(?:_(\d))?/);
-  const year = yearMatch ? yearMatch[1] : 'Unknown';
-  const variant = yearMatch && yearMatch[2] ? yearMatch[2] : '';
-
-  // Create a descriptive name based on year and variant
-  let jerseyName = `Farense ${year}`;
-  let description = `Camisola histórica do Farense de ${year}`;
-
-  if (variant) {
-    const variantNames = {
-      '1': 'Principal',
-      '2': 'Alternativa',
-      '3': 'Terceira'
-    };
-    const variantName = variantNames[variant] || `Variante ${variant}`;
-    jerseyName = `Farense ${year} - ${variantName}`;
-    description = `Camisola ${variantName.toLowerCase()} do Farense de ${year}`;
+  for (const ballYear of ballYears) {
+    const diff = Math.abs(jerseyYear - ballYear);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestYear = ballYear;
+    } else if (diff === minDiff && ballYear > closestYear) {
+      // Prefer the later year in case of a tie
+      closestYear = ballYear;
+    }
   }
+  return closestYear;
+};
 
-  return {
-    name: jerseyName,
-    base64: `data:image/jpeg;base64,${base64}`,
-    description: description
-  };
-});
+try {
+  const jerseyFiles = fs.readdirSync(jerseysDir);
+  const ballFiles = fs.readdirSync(ballsDir);
 
-const constantsContent = `import { JerseyData } from './types';
+  const ballYears = ballFiles.map(getYearFromFilename).filter(Boolean).sort((a, b) => a - b);
 
-// Base64 encoded images of Farense jerseys - organized by year
-export const FARENSE_JERSEYS: JerseyData[] = ${JSON.stringify(jerseys, null, 2)};
-`;
+  const jerseysData = jerseyFiles
+    .map(file => {
+      const year = getYearFromFilename(file);
+      if (!year) return null;
 
-const outputPath = path.join(__dirname, 'constants.ts');
-fs.writeFileSync(outputPath, constantsContent);
-console.log(`✅ Updated constants.ts with ${jerseys.length} jerseys`);
-console.log('Jersey names:');
-jerseys.forEach((j, i) => console.log(`  ${i + 1}. ${j.name}`));
+      const closestBallYear = findClosestBall(year, ballYears);
+      const ballFile = ballFiles.find(bFile => bFile.startsWith(String(closestBallYear)));
+
+      const name = `Farense ${year}`;
+      const description = `Camisola histórica do Farense de ${year}`;
+
+      return {
+        name,
+        path: `/camisolas/${file}`,
+        description,
+        ball: ballFile ? `/bolas/${ballFile}` : undefined,
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => getYearFromFilename(a.path) - getYearFromFilename(b.path));
+
+  const fileContent = `
+import { JerseyData } from './types';
+
+export const FARENSE_JERSEYS: JerseyData[] = ${JSON.stringify(jerseysData, null, 2)};
+
+// The rest of the file (loadJerseys function) remains the same for now.
+// We can refactor it later if needed.
+import { urlToBase64 } from '@/utils/imageUtils';
+
+export const loadJerseys = async (): Promise<JerseyData[]> => {
+  const jerseysWithBase64 = await Promise.all(
+    FARENSE_JERSEYS.map(async (jersey) => {
+      if (jersey.path) {
+        try {
+          const base64 = await urlToBase64(jersey.path);
+          return { ...jersey, base64 };
+        } catch (error) {
+          console.error(\`Failed to load image for \${jersey.name}:\`, error);
+          return jersey;
+        }
+      }
+      return jersey;
+    })
+  );
+  console.log("Loaded jerseys:", jerseysWithBase64.map(j => j.name));
+  return jerseysWithBase64;
+};
+  `;
+
+  fs.writeFileSync(outputFile, fileContent.trim());
+  console.log(`Successfully generated ${outputFile} with ${jerseysData.length} jerseys.`);
+
+} catch (error) {
+  console.error('Error generating jerseys file:', error);
+}
