@@ -22,6 +22,11 @@ const App: React.FC = () => {
   const { editedImage, loading, error: generatorError, handleApplyJersey, setEditedImage } = useImageGenerator();
 
   const [selectedJersey, setSelectedJersey] = useState<JerseyData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setError(jerseysError || fileError || generatorError);
+  }, [jerseysError, fileError, generatorError]);
 
   const handleRandomJersey = () => {
     if (jerseys.length > 0) {
@@ -41,8 +46,6 @@ const App: React.FC = () => {
       setEditedImage(null);
     }
   }, [originalImage]);
-
-  const error = jerseysError || fileError || generatorError;
 
   return (
     <main className="flex flex-col md:flex-row gap-6 p-4 min-h-screen bg-gray-50">

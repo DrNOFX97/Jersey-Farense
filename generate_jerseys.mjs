@@ -43,7 +43,7 @@ try {
       const closestBallYear = findClosestBall(year, ballYears);
       const ballFile = ballFiles.find(bFile => bFile.startsWith(String(closestBallYear)));
 
-      const name = `Farense ${year}`;
+      const name = `Farense ${file.replace(/\.(jpg|png)$/, '')}`;
       const description = `Camisola histórica do Farense de ${year}`;
 
       return {

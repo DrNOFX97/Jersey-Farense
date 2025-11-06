@@ -98,31 +98,31 @@ export const FARENSE_JERSEYS: JerseyData[] = [
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2024",
+    "name": "Farense 2024_1",
     "path": "/camisolas/2024_1.jpg",
     "description": "Camisola histórica do Farense de 2024",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2024",
+    "name": "Farense 2024_2",
     "path": "/camisolas/2024_2.jpg",
     "description": "Camisola histórica do Farense de 2024",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025",
+    "name": "Farense 2025_1",
     "path": "/camisolas/2025_1.jpg",
     "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025",
+    "name": "Farense 2025_2",
     "path": "/camisolas/2025_2.jpg",
     "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
   },
   {
-    "name": "Farense 2025",
+    "name": "Farense 2025_3",
     "path": "/camisolas/2025_3.jpg",
     "description": "Camisola histórica do Farense de 2025",
     "ball": "/bolas/2014.webp"
