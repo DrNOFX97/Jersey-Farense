@@ -23,7 +23,7 @@ const buildPrompt = (selectedJersey: JerseyData): string => {
     1.  **Preserve Facial Identity:** The face of the person in the generated image must be an exact, 100% identical replica of the face in the uploaded photo. This is the most important rule and overrides all other instructions. Do not alter, modify, or regenerate the face.
 
     **Secondary Task:**
-    With the primary directive fulfilled, create a **photorealistic** image of the person in a full-body athletic pose on the pitch at Estádio de São Luís.
+    With the primary directive fulfilled, create a **realistic** image of the person in a full-body athletic pose on the pitch at Estádio de São Luís.
 
     **Image Elements:**
     - **Outfit:** The person must be wearing the provided Farense jersey (${selectedJersey.description}), along with black shorts, black socks, and football boots.
