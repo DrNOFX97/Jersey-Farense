@@ -20,7 +20,7 @@ const withTimeout = <T,>(promise: Promise<T>, timeoutMs: number): Promise<T> => 
 const buildPrompt = (selectedJersey: JerseyData): string => {
   return `
     **Primary Directive (Absolute Priority):**
-    1.  **Preserve Facial Identity:** The face of the person in the generated image must be an exact, 100% identical replica of the face in the original photo. This is the most important rule and overrides all other instructions. Do not alter, modify, or regenerate the face.
+    1.  **Preserve Facial Identity:** The face of the person in the generated image must be an exact, 100% identical replica of the face in the uploaded photo. This is the most important rule and overrides all other instructions. Do not alter, modify, or regenerate the face.
 
     **Secondary Task:**
     With the primary directive fulfilled, create a **photorealistic** image of the person in a full-body athletic pose on the pitch at Estádio de São Luís.
