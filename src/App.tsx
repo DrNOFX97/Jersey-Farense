@@ -47,6 +47,25 @@ const App: React.FC = () => {
     }
   }, [originalImage]);
 
+  useEffect(() => {
+    const loadDefaultImage = async () => {
+      try {
+        const response = await fetch('/exemplo4.jpeg');
+        const blob = await response.blob();
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        setOriginalImage(base64);
+      } catch (error) {
+        setFileError('Failed to load default image.');
+      }
+    };
+    loadDefaultImage();
+  }, []);
+
   return (
     <main className="flex flex-col md:flex-row gap-6 p-4 min-h-screen bg-gray-50">
       <section className="w-full md:w-1/2 space-y-4 bg-white p-6 rounded-lg shadow-lg">
