@@ -79,7 +79,7 @@ export const generateJerseyImage = async (originalImage: string, selectedJersey:
   parts.push({ text: buildPrompt(selectedJersey) });
 
   const request = ai.models.generateContent({
-    model: 'gemini-2.5-flash-image',
+    model: 'models/gemini-2.5-flash-image',
     contents: { parts },
     config: { responseModalities: [Modality.IMAGE] },
   });
