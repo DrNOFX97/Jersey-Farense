@@ -28,9 +28,9 @@ export const JerseySelector: React.FC<JerseySelectorProps> = ({
           </label>
           <select
             id="jersey-select"
-            value={selectedJersey?.name || ''}
+            value={selectedJersey?.id || ''}
             onChange={(e) => {
-              const selected = jerseys.find(j => j.name === e.target.value);
+              const selected = jerseys.find(j => j.id === e.target.value);
               onSelectJersey(selected || null);
             }}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -38,7 +38,7 @@ export const JerseySelector: React.FC<JerseySelectorProps> = ({
           >
             <option value="">-- Selecione uma camisola --</option>
             {jerseys.map((jersey) => (
-              <option key={jersey.name} value={jersey.name}>
+              <option key={jersey.id || jersey.name} value={jersey.id || jersey.name}>
                 {jersey.name}
               </option>
             ))}

@@ -39,32 +39,39 @@ const App: React.FC = () => {
     if (originalImage && !selectedJersey && jerseys.length > 0) {
       handleRandomJersey();
     }
-  }, [originalImage, selectedJersey, jerseys]);
+  }, [originalImage, selectedJersey, jerseys, handleRandomJersey]);
 
   useEffect(() => {
     if (originalImage) {
       setEditedImage(null);
     }
-  }, [originalImage]);
+  }, [originalImage, setEditedImage]);
 
   useEffect(() => {
     const loadDefaultImage = async () => {
       try {
         const response = await fetch('/exemplo4.jpeg');
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: Falha ao carregar imagem padrão`);
+        }
+
         const blob = await response.blob();
         const base64 = await new Promise<string>((resolve, reject) => {
           const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result as string);
-          reader.onerror = reject;
+          reader.onerror = () => reject(new Error('Erro ao ler arquivo de imagem'));
           reader.readAsDataURL(blob);
         });
         setOriginalImage(base64);
       } catch (error) {
-        setFileError('Failed to load default image.');
+        const errorMessage = error instanceof Error ? error.message : 'Falha ao carregar imagem padrão';
+        console.error('Erro ao carregar imagem padrão:', error);
+        setFileError(errorMessage);
       }
     };
     loadDefaultImage();
-  }, []);
+  }, [setFileError, setOriginalImage]);
 
   return (
     <main className="flex flex-col md:flex-row gap-6 p-4 min-h-screen bg-gray-50">

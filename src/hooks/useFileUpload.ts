@@ -13,14 +13,14 @@ const fileToBase64 = (file: File): Promise<string> => {
 const validateFileSize = (file: File): string | null => {
   const maxSizeBytes = API_CONFIG.MAX_IMAGE_SIZE_MB * 1024 * 1024;
   if (file.size > maxSizeBytes) {
-    return `File size exceeds ${API_CONFIG.MAX_IMAGE_SIZE_MB}MB limit. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`;
+    return `Tamanho do ficheiro excede o limite de ${API_CONFIG.MAX_IMAGE_SIZE_MB}MB. Tamanho actual: ${(file.size / 1024 / 1024).toFixed(2)}MB`;
   }
   return null;
 };
 
 const validateFileType = (file: File): string | null => {
   if (!API_CONFIG.SUPPORTED_IMAGE_TYPES.includes(file.type)) {
-    return `Unsupported image type. Supported types: ${API_CONFIG.SUPPORTED_IMAGE_TYPES.join(', ')}`;
+    return `Tipo de imagem não suportado. Tipos suportados: ${API_CONFIG.SUPPORTED_IMAGE_TYPES.join(', ')}`;
   }
   return null;
 };
@@ -53,7 +53,9 @@ export const useFileUpload = () => {
       setOriginalImage(base64);
       setError(null);
     } catch (err) {
-      setError('Falha ao ler o ficheiro. Tente novamente.');
+      const errorMessage = err instanceof Error ? err.message : 'Falha ao ler o ficheiro. Tente novamente.';
+      console.error('Erro ao processar ficheiro:', err);
+      setError(`Falha ao ler o ficheiro: ${errorMessage}`);
     }
   };
 
