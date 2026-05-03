@@ -53,15 +53,16 @@ CRITICAL - PRESERVE JERSEY DETAILS FROM SECOND IMAGE:
 - Include all sponsor logos, manufacturer logos, and text exactly as shown
 - Preserve the collar style, sleeve design, and all trim details
 
-EXTREMELY IMPORTANT - CLUB EMBLEM/CREST:
-- The club emblem on the chest is the most critical detail${hasEmblem ? ' - use the separate high-resolution emblem image as a reference for design accuracy' : ''}
-- Use the ${hasEmblem ? 'emblem reference to understand the exact design, then ' : ''}integrate it naturally onto the jersey as it would appear in the era
-- The emblem should look like it's embroidered or printed on the fabric, not pasted on top
-- Match the emblem design exactly: shape, colors (green "SCP", blue section with castle, white/black diagonal with golden lion), text, symbols, and border
-- The emblem should have realistic fabric texture - it's part of the jersey, with natural shadows, folds, and fabric integration
-- Position the emblem on the left chest as it would traditionally appear on a football jersey from that era
-- The emblem must be clearly visible, accurately detailed, and feel authentic to the period
-- If the emblem has text (like "SC FARENSE"), reproduce it exactly but integrate it naturally into the fabric
+EXTREMELY IMPORTANT - CLUB EMBLEM/CREST ON THE JERSEY:
+- The club emblem/badge visible on the left chest of the jersey in the second image is THE most critical detail
+- Replicate the EXACT emblem design as it appears on the jersey image with MAXIMUM DETAIL and clarity
+- Copy every element of the emblem exactly: all colors, shapes, symbols, text, and decorative elements visible on the jersey
+- The emblem must be SHARP, CLEAR, and LEGIBLE - prioritize high detail and visibility
+- Maintain the exact position, size, and orientation of the emblem as shown on the original jersey
+- The emblem should look naturally integrated into the fabric (embroidered or printed on the jersey), NOT pasted on top
+- Include realistic fabric texture with natural shadows and folds where the emblem sits
+- If the emblem has any text or letters, reproduce them with perfect clarity and readability
+- Preserve the authentic look of how the emblem appeared on jerseys from that specific era
 
 OUTFIT AND SETTING:
 - Add black football shorts, black socks, and football boots
